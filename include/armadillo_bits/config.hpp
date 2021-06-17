@@ -1,11 +1,11 @@
 // Copyright 2008-2016 Conrad Sanderson (http://conradsanderson.id.au)
 // Copyright 2008-2016 National ICT Australia (NICTA)
-//
+// 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 // http://www.apache.org/licenses/LICENSE-2.0
-//
+// 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,8 +14,9 @@
 // ------------------------------------------------------------------------
 
 
+
 #if !defined(ARMA_WARN_LEVEL)
-#define ARMA_WARN_LEVEL 2
+  #define ARMA_WARN_LEVEL 2
 #endif
 //// The level of warning messages printed to ARMA_CERR_STREAM.
 //// Must be an integer >= 0. The default value is 2.
@@ -40,9 +41,9 @@
 #endif
 
 #if !defined(ARMA_USE_NEWARP)
-// #define ARMA_USE_NEWARP
+#define ARMA_USE_NEWARP
 //// Uncomment the above line to enable the built-in partial emulation of ARPACK.
-//// This is used for eigen decompositions of real (non-complex) sparse matrices, eg. eigs_sym(), svds()
+//// This is used for eigen decompositions of real (non-complex) sparse matrices, eg. eigs_sym(), svds() 
 #endif
 
 #if !defined(ARMA_USE_ARPACK)
@@ -134,28 +135,28 @@
 #endif
 
 #if !defined(ARMA_OPTIMISE_BAND)
-#define ARMA_OPTIMISE_BAND
-//// Comment out the above line if you don't want automatically optimised handling
-//// of band matrices by solve() and chol()
+  #define ARMA_OPTIMISE_BAND
+  //// Comment out the above line if you don't want automatically optimised handling
+  //// of band matrices by solve() and chol()
 #endif
 
 #if !defined(ARMA_OPTIMISE_SYMPD)
-#define ARMA_OPTIMISE_SYMPD
-//// Comment out the above line if you don't want automatically optimised handling
-//// of symmetric/hermitian positive definite matrices by various functions:
-//// solve(), inv(), pinv(), expmat(), logmat(), sqrtmat(), rcond()
+  #define ARMA_OPTIMISE_SYMPD
+  //// Comment out the above line if you don't want automatically optimised handling
+  //// of symmetric/hermitian positive definite matrices by various functions:
+  //// solve(), inv(), pinv(), expmat(), logmat(), sqrtmat(), rcond()
 #endif
 
 // #define ARMA_USE_HDF5_ALT
 #if defined(ARMA_USE_HDF5_ALT) && defined(ARMA_USE_WRAPPER)
-#undef ARMA_USE_HDF5
-#define ARMA_USE_HDF5
-
-// #define ARMA_HDF5_INCLUDE_DIR /usr/include/
+  #undef  ARMA_USE_HDF5
+  #define ARMA_USE_HDF5
+  
+  // #define ARMA_HDF5_INCLUDE_DIR /usr/include/
 #endif
 
 #if !defined(ARMA_MAT_PREALLOC)
-#define ARMA_MAT_PREALLOC 16
+  #define ARMA_MAT_PREALLOC 16
 #endif
 //// This is the number of preallocated elements used by matrices and vectors;
 //// it must be an integer that is at least 1.
@@ -163,13 +164,13 @@
 //// change the number to the size of your vectors.
 
 #if !defined(ARMA_OPENMP_THRESHOLD)
-#define ARMA_OPENMP_THRESHOLD 320
+  #define ARMA_OPENMP_THRESHOLD 320
 #endif
 //// The minimum number of elements in a matrix to allow OpenMP based parallelisation;
 //// it must be an integer that is at least 1.
 
 #if !defined(ARMA_OPENMP_THREADS)
-#define ARMA_OPENMP_THREADS 8
+  #define ARMA_OPENMP_THREADS 8
 #endif
 //// The maximum number of threads to use for OpenMP based parallelisation;
 //// it must be an integer that is at least 1.
@@ -187,27 +188,27 @@
 
 
 #if defined(ARMA_DEFAULT_OSTREAM)
-#pragma message("WARNING: support for ARMA_DEFAULT_OSTREAM is deprecated and will be removed;")
-#pragma message("WARNING: use ARMA_COUT_STREAM and ARMA_CERR_STREAM instead")
+  #pragma message ("WARNING: support for ARMA_DEFAULT_OSTREAM is deprecated and will be removed;")
+  #pragma message ("WARNING: use ARMA_COUT_STREAM and ARMA_CERR_STREAM instead")
 #endif
 
 
 #if !defined(ARMA_COUT_STREAM)
-#if defined(ARMA_DEFAULT_OSTREAM)
-// for compatibility with earlier versions of Armadillo
-#define ARMA_COUT_STREAM ARMA_DEFAULT_OSTREAM
-#else
-#define ARMA_COUT_STREAM std::cout
-#endif
+  #if defined(ARMA_DEFAULT_OSTREAM)
+    // for compatibility with earlier versions of Armadillo
+    #define ARMA_COUT_STREAM ARMA_DEFAULT_OSTREAM
+  #else
+    #define ARMA_COUT_STREAM std::cout
+  #endif
 #endif
 
 #if !defined(ARMA_CERR_STREAM)
-#if defined(ARMA_DEFAULT_OSTREAM)
-// for compatibility with earlier versions of Armadillo
-#define ARMA_CERR_STREAM ARMA_DEFAULT_OSTREAM
-#else
-#define ARMA_CERR_STREAM std::cerr
-#endif
+  #if defined(ARMA_DEFAULT_OSTREAM)
+    // for compatibility with earlier versions of Armadillo
+    #define ARMA_CERR_STREAM ARMA_DEFAULT_OSTREAM
+  #else
+    #define ARMA_CERR_STREAM std::cerr
+  #endif
 #endif
 
 
@@ -226,110 +227,110 @@
 #endif
 
 #if defined(ARMA_DONT_USE_LAPACK)
-#undef ARMA_USE_LAPACK
+  #undef ARMA_USE_LAPACK
 #endif
 
 #if defined(ARMA_DONT_USE_BLAS)
-#undef ARMA_USE_BLAS
+  #undef ARMA_USE_BLAS
 #endif
 
 #if defined(ARMA_DONT_USE_NEWARP) || !defined(ARMA_USE_LAPACK)
-#undef ARMA_USE_NEWARP
+  #undef ARMA_USE_NEWARP
 #endif
 
 #if defined(ARMA_DONT_USE_ARPACK)
-#undef ARMA_USE_ARPACK
+  #undef ARMA_USE_ARPACK
 #endif
 
 #if defined(ARMA_DONT_USE_SUPERLU)
-#undef ARMA_USE_SUPERLU
-#undef ARMA_SUPERLU_INCLUDE_DIR
+  #undef ARMA_USE_SUPERLU
+  #undef ARMA_SUPERLU_INCLUDE_DIR
 #endif
 
 #if defined(ARMA_DONT_USE_ATLAS)
-#undef ARMA_USE_ATLAS
-#undef ARMA_ATLAS_INCLUDE_DIR
+  #undef ARMA_USE_ATLAS
+  #undef ARMA_ATLAS_INCLUDE_DIR
 #endif
 
 #if defined(ARMA_DONT_USE_WRAPPER)
-#undef ARMA_USE_WRAPPER
-#undef ARMA_USE_HDF5_ALT
+  #undef ARMA_USE_WRAPPER
+  #undef ARMA_USE_HDF5_ALT
 #endif
 
 #if defined(ARMA_DONT_USE_FORTRAN_HIDDEN_ARGS)
-#undef ARMA_USE_FORTRAN_HIDDEN_ARGS
+  #undef ARMA_USE_FORTRAN_HIDDEN_ARGS
 #endif
 
 #if !defined(ARMA_DONT_USE_STD_MUTEX)
-// #define ARMA_DONT_USE_STD_MUTEX
-//// Uncomment the above line to disable use of std::mutex
+  // #define ARMA_DONT_USE_STD_MUTEX
+  //// Uncomment the above line to disable use of std::mutex
 #endif
 
 // for compatibility with earlier versions of Armadillo
 #if defined(ARMA_DONT_USE_CXX11_MUTEX)
-#pragma message("WARNING: support for ARMA_DONT_USE_CXX11_MUTEX is deprecated and will be removed;")
-#pragma message("WARNING: use ARMA_DONT_USE_STD_MUTEX instead")
-#undef ARMA_DONT_USE_STD_MUTEX
-#define ARMA_DONT_USE_STD_MUTEX
+  #pragma message ("WARNING: support for ARMA_DONT_USE_CXX11_MUTEX is deprecated and will be removed;")
+  #pragma message ("WARNING: use ARMA_DONT_USE_STD_MUTEX instead")
+  #undef  ARMA_DONT_USE_STD_MUTEX
+  #define ARMA_DONT_USE_STD_MUTEX
 #endif
 
 #if defined(ARMA_DONT_USE_OPENMP)
-#undef ARMA_USE_OPENMP
+  #undef ARMA_USE_OPENMP
 #endif
 
 #if defined(ARMA_USE_WRAPPER)
-#if !defined(ARMA_USE_EXTERN_RNG)
-// #define ARMA_USE_EXTERN_RNG
-#endif
+  #if !defined(ARMA_USE_EXTERN_RNG)
+    // #define ARMA_USE_EXTERN_RNG
+  #endif
 #endif
 
 #if defined(ARMA_DONT_USE_EXTERN_RNG)
-#undef ARMA_USE_EXTERN_RNG
+  #undef ARMA_USE_EXTERN_RNG
 #endif
 
 // for compatibility with earlier versions of Armadillo
 #if defined(ARMA_DONT_USE_EXTERN_CXX11_RNG)
-#pragma message("WARNING: support for ARMA_DONT_USE_EXTERN_CXX11_RNG is deprecated and will be removed;")
-#pragma message("WARNING: use ARMA_DONT_USE_EXTERN_RNG instead")
-#undef ARMA_USE_EXTERN_RNG
+  #pragma message ("WARNING: support for ARMA_DONT_USE_EXTERN_CXX11_RNG is deprecated and will be removed;")
+  #pragma message ("WARNING: use ARMA_DONT_USE_EXTERN_RNG instead")
+  #undef ARMA_USE_EXTERN_RNG
 #endif
 
 #if defined(ARMA_32BIT_WORD)
-#undef ARMA_64BIT_WORD
+  #undef ARMA_64BIT_WORD
 #endif
 
 #if defined(ARMA_DONT_USE_HDF5)
-#undef ARMA_USE_HDF5
-#undef ARMA_USE_HDF5_ALT
+  #undef ARMA_USE_HDF5
+  #undef ARMA_USE_HDF5_ALT
 #endif
 
 #if defined(ARMA_DONT_OPTIMISE_BAND) || defined(ARMA_DONT_OPTIMISE_SOLVE_BAND)
-#undef ARMA_OPTIMISE_BAND
+  #undef ARMA_OPTIMISE_BAND
 #endif
 
 #if defined(ARMA_DONT_OPTIMISE_SYMPD) || defined(ARMA_DONT_OPTIMISE_SOLVE_SYMPD)
-#undef ARMA_OPTIMISE_SYMPD
+  #undef ARMA_OPTIMISE_SYMPD
 #endif
 
 #if defined(ARMA_DONT_PRINT_ERRORS)
-#undef ARMA_PRINT_ERRORS
+  #undef ARMA_PRINT_ERRORS
 #endif
 
 #if defined(ARMA_DONT_PRINT_EXCEPTIONS)
-#undef ARMA_PRINT_EXCEPTIONS
+  #undef ARMA_PRINT_EXCEPTIONS
 #endif
 
 #if !defined(ARMA_DONT_ZERO_INIT)
-// #define ARMA_DONT_ZERO_INIT
-//// Uncomment the above line to disable initialising elements to zero during construction of dense matrices and cubes
+  // #define ARMA_DONT_ZERO_INIT
+  //// Uncomment the above line to disable initialising elements to zero during construction of dense matrices and cubes
 #endif
 
 #if defined(ARMA_DONT_PRINT_HDF5_ERRORS)
-#undef ARMA_PRINT_HDF5_ERRORS
+  #undef ARMA_PRINT_HDF5_ERRORS
 #endif
 
 #if defined(ARMA_NO_CRIPPLED_LAPACK)
-#undef ARMA_CRIPPLED_LAPACK
+  #undef ARMA_CRIPPLED_LAPACK
 #endif
 
 

@@ -378,7 +378,7 @@ Conrad Sanderson and Ryan Curtin.
 <tr style="background-color: #F5F5F5;"><td><a href="#clamp">clamp</a></td><td>&nbsp;</td><td>obtain clamped elements according to given limits</td></tr>
 <tr><td><a href="#cond">cond</a></td><td>&nbsp;</td><td>condition number of matrix</td></tr>
 <tr><td><a href="#conj">conj</a></td><td>&nbsp;</td><td>obtain complex conjugate of each element</td></tr>
-<tr><td><a href="#conv_to">conv_to</a></td><td>&nbsp;</td><td>convert between matrix types</td></tr>
+<tr><td><a href="#conv_to">conv_to</a></td><td>&nbsp;</td><td>convert/cast between matrix types</td></tr>
 <tr style="background-color: #F5F5F5;"><td><a href="#cross">cross</a></td><td>&nbsp;</td><td>cross product</td></tr>
 <tr style="background-color: #F5F5F5;"><td><a href="#cumsum">cumsum</a></td><td>&nbsp;</td><td>cumulative sum</td></tr>
 <tr style="background-color: #F5F5F5;"><td><a href="#cumprod">cumprod</a></td><td>&nbsp;</td><td>cumulative product</td></tr>
@@ -2674,11 +2674,14 @@ optionally first changing the size to specified dimensions
 Examples:
 <ul>
 <pre>
-mat A(5,10);  A.zeros();   // or:  mat A(5,10,fill::zeros);
+mat A;
+A.zeros(5, 10);   // or:  mat A(5, 10, fill::zeros);
 
-mat B;  B.zeros(10,20);
+mat B;
+B.zeros( size(A) );
 
-mat C;  C.zeros( size(B) );
+mat C(5, 10, fill::randu);
+C.zeros();
 </pre>
 </ul>
 </li>
@@ -2757,11 +2760,14 @@ optionally first changing the size to specified dimensions
 Examples:
 <ul>
 <pre>
-mat A(5,10);  A.ones();   // or:  mat A(5,10,fill::ones);
+mat A;
+A.ones(5, 10);   // or:  mat A(5, 10, fill::ones);
 
-mat B;  B.ones(10,20);
+mat B;
+B.ones( size(A) );
 
-mat C;  C.ones( size(B) );
+mat C(5, 10, fill::randu);
+C.ones();
 </pre>
 </ul>
 </li>
@@ -2806,11 +2812,14 @@ An identity matrix is generated when <i>n_rows</i> = <i>n_cols</i>
 Examples:
 <ul>
 <pre>
-mat A(5,5);  A.eye();  // or:  mat A(5,5,fill::eye);
+mat A;
+A.eye(5, 5);  // or:  mat A(5, 5, fill::eye);
 
-mat B;  B.eye(5,5);
+mat B;
+B.eye( size(A) );
 
-mat C;  C.eye( size(B) );
+mat C(5, 5, fill::randu);
+C.eye();
 </pre>
 </ul>
 </li>
@@ -2939,11 +2948,14 @@ To change the RNG seed, use <i>arma_rng::set_seed(value)</i> or <i>arma_rng::set
 Examples:
 <ul>
 <pre>
-mat A(5,10);  A.randu();   // or:  mat A(5,10,fill::randu);
+mat A;
+A.randu(5, 10);   // or:  mat A(5, 10, fill::randu);
 
-mat B;  B.randu(10,20);
+mat B;
+B.randu( size(A) );
 
-mat C;  C.randu( size(B) );
+mat C(5, 10, fill::zeros);
+C.randu();
 
 arma_rng::set_seed_random();  // set the seed to a random value
 </pre>
@@ -3043,7 +3055,7 @@ std::mt19937 engine;  // Mersenne twister random number engine
 
 std::uniform_real_distribution&lt;double&gt; distr(0.0, 1.0);
   
-mat A(4,5);
+mat A(4, 5, fill:none);
   
 A.imbue( [&amp;]() { return distr(engine); } );
 </pre>
@@ -3392,11 +3404,14 @@ To explicitly preserve data while changing the size, use <a href="#reshape_membe
 Examples:
 <ul>
 <pre>
-mat A;  A.set_size(5,10);       // or:  mat A(5,10);
+mat A;
+A.set_size(5, 10);      // or:  mat A(5, 10, fill::none);
 
-mat B;  B.set_size( size(A) );  // or:  mat B( size(A) );
+mat B;
+B.set_size( size(A) );  // or:  mat B(size(A), fill:none);
 
-vec v;  v.set_size(100);        // or:  vec v(100);
+vec v;
+v.set_size(100);        // or:  vec v(100, fill::none);
 </pre>
 </ul>
 </li>
@@ -3608,6 +3623,7 @@ Examples:
 <ul>
 <pre>
 mat A(5, 6, fill::randu);
+
 mat B;
 B.copy_size(A);
 
@@ -8602,7 +8618,7 @@ conv_to&lt; <i>type</i> &gt;::from( X )
 </b>
 <ul>
 <li>
-Convert from one matrix type to another (eg. <i>mat</i> to <i>imat</i>), or one cube type to another (eg. <i>cube</i> to <i>icube</i>)
+Convert (cast) from one matrix type to another (eg. <i>mat</i> to <i>imat</i>), or one cube type to another (eg. <i>cube</i> to <i>icube</i>)
 </li>
 <br>
 <li>
@@ -8617,7 +8633,7 @@ Conversion of a <i>mat</i> object into <i>colvec</i>, <i>rowvec</i> or <i>std::v
 Examples:
 <ul>
 <pre>
-mat  A(5, 5, fill::randu);
+ mat A(5, 5, fill::randu);
 fmat B = conv_to&lt;fmat&gt;::from(A);
 
 typedef std::vector&lt;double&gt; stdvec;
@@ -19188,6 +19204,7 @@ List of additions and changes for each version:
 <li>more efficient use of OpenMP</li>
 <li>vector, matrix and cube constructors now initialise elements to zero by default;
 <br>element initialisation can be disabled via the <code>fill::none</code> specifier, eg. <code>mat X(4,5,fill::none)</code>
+</li>
 </ul>
 </li>
 <br>
